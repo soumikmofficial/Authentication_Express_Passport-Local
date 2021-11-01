@@ -1,8 +1,16 @@
 const express = require("express");
 const connectDB = require("./config/connect");
+const expressLayouts = require("express-ejs-layouts");
+const pageRouter = require("./routes/index");
 const app = express();
 
 require("dotenv").config();
+
+// ejs
+app.use(expressLayouts);
+app.set("view engine", "ejs");
+
+app.use("/", pageRouter);
 
 const port = process.env.PORT || 5000;
 
