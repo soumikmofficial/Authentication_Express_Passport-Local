@@ -1,3 +1,6 @@
+const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+
 // **the pages***
 
 const homePage = (req, res) => {
@@ -37,11 +40,33 @@ const register = async (req, res) => {
       email,
       password1,
       password2,
-      title: register,
+      title: "register",
     });
+  } else {
+    try {
+      let newUser = await User.findOne({ email });
+      if (newUser) {
+        errors.push({ msg: "Email already registered" });
+        return res.render("register", {
+          errors,
+          email,
+          password1,
+          password2,
+          title: "register",
+        });
+      } else {
+        newUser = await new User({
+          email,
+          password: await bcrypt.hash(password1, 12),
+        });
+        await newUser.save();
+        req.flash("success_msg", "You have registered successfully");
+        res.redirect("/user/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
-  console.log(req.body);
-  res.redirect("/dashboard");
 };
 
 const login = async (req, res) => {

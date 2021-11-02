@@ -4,7 +4,7 @@
       <%- include('./partials/error-alerts') %>
       <!-- card -->
       <div class="card p-3">
-        <div class="card-header text-center mb-4">Login</div>
+        <div class="card-header text-center mb-4">Register</div>
         <form action="/user/register" method="POST">
           <div class="form-group mb-4">
             <label for="email" class="form-label">Email address</label>
@@ -17,7 +17,7 @@
               name="email"
               aria-describedby="emailHelp"
               placeholder="Enter email"
-              value="<% typeof email !== 'undefined' ?
+              value="<%= typeof email !== 'undefined' ?
             email : '' %>"
             />
           </div>
@@ -30,7 +30,7 @@
               id="password1"
               name="password1"
               placeholder="Password"
-              value="<%
+              value="<%=
             typeof password1 !== 'undefined' ? password1 : '' %>"
             />
           </div>
@@ -43,7 +43,7 @@
               id="password2"
               name="password2"
               placeholder="Retype Password"
-              value="<% typeof password2 !== 'undefined' ? password2 : '' %>"
+              value="<%= typeof password2 !== 'undefined' ? password2 : '' %>"
             />
           </div>
           <button type="submit" class="btn btn-success btn-sm col-12">
