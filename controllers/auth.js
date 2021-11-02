@@ -49,4 +49,11 @@ const login = async (req, res) => {
   res.send("login");
 };
 
-module.exports = { homePage, loginPage, registerPage, register, login };
+module.exports = {
+  homePage,
+  loginPage,
+  registerPage,
+  register,
+  login,
+  dashboard,
+};

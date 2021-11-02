@@ -1,24 +1,7 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-4 m-auto">
-      <!-- alert -->
-      <% if (typeof errors !== 'undefined') { %> <% errors.forEach((error) => {
-      %>
-
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <%= error.msg %>
-        <button
-          type="button"
-          class="close btn btn-outline"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <% }) %> <% } %>
-
+      <%- include('./partials/error-alerts') %>
       <!-- card -->
       <div class="card p-3">
         <div class="card-header text-center mb-4">Login</div>
