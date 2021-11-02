@@ -1,12 +1,32 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-4 m-auto">
+      <!-- alert -->
+      <% if (typeof errors !== 'undefined') { %> <% errors.forEach((error) => {
+      %>
+
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= error.msg %>
+        <button
+          type="button"
+          class="close btn btn-outline"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <% }) %> <% } %>
+
+      <!-- card -->
       <div class="card p-3">
         <div class="card-header text-center mb-4">Login</div>
         <form action="/user/register" method="POST">
           <div class="form-group mb-4">
             <label for="email" class="form-label">Email address</label>
             <input
+              required
               mt-3
               type="email"
               class="form-control form-control-sm"
@@ -14,6 +34,8 @@
               name="email"
               aria-describedby="emailHelp"
               placeholder="Enter email"
+              value="<% typeof email !== 'undefined' ?
+            email : '' %>"
             />
           </div>
           <div class="form-group mb-4">
@@ -25,6 +47,8 @@
               id="password1"
               name="password1"
               placeholder="Password"
+              value="<%
+            typeof password1 !== 'undefined' ? password1 : '' %>"
             />
           </div>
           <div class="form-group mb-4">
@@ -36,6 +60,7 @@
               id="password2"
               name="password2"
               placeholder="Retype Password"
+              value="<% typeof password2 !== 'undefined' ? password2 : '' %>"
             />
           </div>
           <button type="submit" class="btn btn-success btn-sm col-12">
