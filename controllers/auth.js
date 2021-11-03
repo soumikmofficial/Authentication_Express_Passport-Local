@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 // **the pages***
 
@@ -14,7 +15,7 @@ const registerPage = (req, res) => {
   res.render("register", { title: "Register" });
 };
 const dashboard = (req, res) => {
-  res.render("dashboard", { title: "Dashboard" });
+  res.render("dashboard", { title: "Dashboard", email: req.user.email });
 };
 
 // **the auth functons**
@@ -69,9 +70,18 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
-  console.log(req.body);
-  res.send("login");
+const login = (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/user/login",
+    failureFlash: true,
+  })(req, res, next);
+};
+
+const logout = (req, res) => {
+  req.logout();
+  req.flash("success_msg", "You have logged out successfully");
+  res.redirect("/user/login");
 };
 
 module.exports = {
@@ -81,4 +91,5 @@ module.exports = {
   register,
   login,
   dashboard,
+  logout,
 };
